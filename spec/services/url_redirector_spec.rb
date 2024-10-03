@@ -1,4 +1,3 @@
-# spec/services/url_redirector_spec.rb
 require 'rails_helper'
 
 RSpec.describe UrlRedirector do
