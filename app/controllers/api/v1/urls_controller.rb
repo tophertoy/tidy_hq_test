@@ -9,6 +9,7 @@ module Api
       end
 
       def show
+        # this should possibly be short_url similar to the controller
         url = Url.find_by!(id: params[:id])
         render json: url.as_json(only: [:id, :original_url, :short_url, :expires_at, :click_count]), status: :ok
       end
