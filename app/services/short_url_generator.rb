@@ -11,9 +11,6 @@ class ShortUrlGenerator
   private
 
   def unique_short_url
-    loop do
-      short_url = SecureRandom.alphanumeric(6)
-      break short_url unless Url.exists?(short_url: short_url)
-    end
+    Digest::MD5.hexdigest("#{@url.original_url}-#{Time.current.to_i}")[0, 6]
   end
 end
