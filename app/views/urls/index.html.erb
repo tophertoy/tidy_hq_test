@@ -1,0 +1,24 @@
+<h1>List of Shortened URLs</h1>
+
+<%= link_to 'Shorten a New URL', new_url_path, class: "btn btn-primary" %>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Original URL</th>
+      <th>Short URL</th>
+      <th>Expiration Date</th>
+      <th>Click Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @urls.each do |url| %>
+      <tr>
+        <td><%= link_to url.original_url, url.original_url, target: '_blank' %></td>
+        <td><%= link_to url.short_url, url, target: '_blank' %></td>
+        <td><%= url.expires_at %></td>
+        <td><%= url.click_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

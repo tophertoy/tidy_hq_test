@@ -1,0 +1,26 @@
+<h1>Shorten a new URL</h1>
+
+<% if @url.errors.any? %>
+  <div class="error-messages">
+    <h2>Errors:</h2>
+    <ul>
+      <% @url.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @url, local: true, data: { turbo: false } do |form| %>
+  <div>
+    <%= form.label :original_url, "Enter URL:" %><br>
+    <%= form.text_field :original_url, size: 50, value: "http://www.google.com" %>
+  </div>
+
+  <div>
+    <%= form.submit "Shorten URL" %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back to URL List', urls_path %>
