@@ -38,7 +38,6 @@ class UrlsController < ApplicationController
   def set_url
     @url = Url.find_by(short_url: params[:id])
 
-    # If URL is not found, raise an error or handle it
     unless @url
       render plain: "Short URL not found", status: :not_found
     end
