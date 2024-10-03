@@ -11,7 +11,8 @@ class UrlsController < ApplicationController
 
   def create
     @url = Url.new(url_params)
-    @url.short_url = generate_unique_short_url
+
+    @url = ShortUrlGenerator.new(@url).perform
 
     if @url.save
       redirect_to urls_path, notice: 'Short URL was successfully created.'
@@ -45,12 +46,5 @@ class UrlsController < ApplicationController
 
   def url_params
     params.require(:url).permit(:original_url)
-  end
-
-  def generate_unique_short_url
-    loop do
-      short_url = SecureRandom.alphanumeric(6) # Generates a random 6-character alphanumeric string
-      break short_url unless Url.exists?(short_url: short_url)
-    end
   end
 end
