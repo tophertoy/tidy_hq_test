@@ -22,10 +22,12 @@ class UrlsController < ApplicationController
   end
 
   def show
-    if @url.expires_at > Time.current
-      @url.increment!(:click_count)
-      redirect_to @url.original_url, allow_other_host: true
-    else
+    result = UrlRedirector.new(@url).perform
+
+    case result[:status]
+    when :redirect
+      redirect_to result[:destination], allow_other_host: true
+    when :expired
       render plain: "This short URL has expired.", status: :gone
     end
   end
